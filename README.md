@@ -7,4 +7,7 @@ Hago parte de MisionTic 2022, a la fecha (setiembre de 2021) tengo conocimeintos
 
 
 ### Nicolás Mozo 
+
+Hola, interesado en este mundo de la programación. Vengo de una carrera en finanzas pero actualmente mi enfoque es más en FinTech siendo la programación un punto clave. 
+
 ### Brahyan 

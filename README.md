@@ -11,4 +11,6 @@ Hago parte de MisionTic 2022, a la fecha (setiembre de 2021) tengo conocimeintos
 
 Hola, interesado en este mundo de la programación. Vengo de una carrera en finanzas pero actualmente mi enfoque es más en FinTech siendo la programación un punto clave. 
 
-### Brahyan 
+### Brahyam Maldonado
+
+Tengo 23 años, estoy interesado en aprender todo lo que pueda en el campo de la programación. Soy matemático de profesión, mi correo es brmi1111@hotmail.com o brmi1111@gmail.com

@@ -14,3 +14,7 @@ Hola, interesado en este mundo de la programación. Vengo de una carrera en fina
 ### Brahyam Maldonado
 
 Tengo 23 años, estoy interesado en aprender todo lo que pueda en el campo de la programación. Soy matemático de profesión, mi correo es brmi1111@hotmail.com o brmi1111@gmail.com
+
+### Jose Duque M
+
+Hola a todos, soy José Luis Duque Muñoz y tengo 23 años. Soy ingeniero electrónico y tengo conocimientos en lenguajes de programación como C++, Java, Python y SQL.

@@ -4,4 +4,4 @@ Orlando Mina
 
 ### Interfaz para el ingreso a la aplicación
 
-![](preview.png)
+![](preview.PNG)

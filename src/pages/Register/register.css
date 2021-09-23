@@ -207,3 +207,32 @@ label {
 .others-text p:hover{
     color: #000;
 }
+
+
+@media (max-width: 768px) {
+
+    .register-container {
+        display: block;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+    .register-left {
+        display: block;
+        margin-bottom: 10%;
+    }
+
+    .register-title h1 {
+        font-size: 4rem;
+    }
+    
+    .register-title h2 {
+        font-size: 1rem;
+    }
+    
+    .register-right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+    }
+}

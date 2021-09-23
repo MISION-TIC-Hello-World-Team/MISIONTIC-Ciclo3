@@ -15,7 +15,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: nowrap;
 }
 
 .login-container {
@@ -52,7 +51,6 @@
     align-items: center;
     border: #000000 solid;
 }
-
 
 .login-form h1 {
     margin-bottom: 20%;
@@ -195,26 +193,55 @@ label {
     cursor: pointer;
 }
 
-.others-text{
+.others-text {
     display: flex;
     justify-content: space-between;
     margin-top: 10%;
     cursor: pointer;
 }
 
-.others-text a{
+.others-text a {
     color: #999;
     text-decoration: none;
 }
 
-.others-text a:hover{
+.others-text a:hover {
     color: #000;
 }
 
-.link-text-left{
+.link-text-left {
     margin-right: 40px;
 }
 
-.link-text-right{
+.link-text-right {
     margin-left: 40px;
+}
+
+/*Ajustes para celular*/
+
+@media (max-width: 768px) {
+    .login-container {
+        display: block;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+    .login-left {
+        display: block;
+        margin-bottom: 20%;
+    }
+
+    .login-title h1 {
+        font-size: 4rem;
+    }
+    
+    .login-title h2 {
+        font-size: 1rem;
+    }
+    
+    .login-right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+    }
 }

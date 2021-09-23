@@ -13,34 +13,38 @@ const Login = () => (
             </div>
             <div className="login-right">
                 <div className="login-form">
-                    <h1>Iniciar sesion</h1>
+                    <h1>Gestión de usuario</h1>
                     <form>
                         <div className="group">
-                            <input type="email" required />
+                            <input type="text" required />
                             <span className="highlight"></span>
                             <span className="bar"></span>
-                            <label>Correo</label>
+                            <label>Ingrese su nombre</label>
                         </div>
 
                         <div className="group">
-                            <input type="password" required />
+                            <input type="text" required />
                             <span className="highlight"></span>
                             <span className="bar"></span>
-                            <label>Contraseña</label>
+                            <label>Ingrese su ID</label>
+                        </div>
+                            
+                        <div className="group">
+                            <label class="options" for="roles">Elija un rol: </label>
+                            <select id ="roles" class="select">
+                                <option>Vendedor</option>
+                                <option>Administrador</option>
+                                <option>Ejecutivo</option>
+                                <option>Operario</option>
+                                <option>Director</option>
+                                <option>Gerente comercial</option>
+                            </select>
                         </div>
 
                         <div className="login-submit">
                             <input type="submit" value="Entrar" />
                         </div>
 
-                        <div className="others-text">
-                            <div>
-                                <Link className="link-text-left" to="/">Olvide mi contraseña</Link>
-                            </div>
-                            <div>
-                                <Link className="link-text-right" to="/registro">Crear cuenta</Link>
-                            </div>
-                        </div>
                     </form>
                 </div>
             </div>

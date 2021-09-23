@@ -44,7 +44,7 @@
 
 .login-right {
     /*width: 50%;*/
-    padding: 2% 5%;
+    padding: 4% 5%;
     /*background: green;*/
     display: flex;
     justify-content: center;
@@ -88,6 +88,10 @@ label {
     transition: 0.2s ease all;
     -moz-transition: 0.2s ease all;
     -webkit-transition: 0.2s ease all;
+}
+
+.options {
+    color: #000;
 }
 
 /* active state */
@@ -244,4 +248,9 @@ label {
         align-items: center;
         border: none;
     }
+}
+
+/* SELECT ================================= */
+.select {
+    border: none;
 }

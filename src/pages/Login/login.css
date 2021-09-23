@@ -92,6 +92,7 @@ label {
 
 .options {
     color: #000;
+    position: static;
 }
 
 /* active state */
@@ -253,4 +254,10 @@ label {
 /* SELECT ================================= */
 .select {
     border: none;
+    width: 50%;
+    background-color: #EEEEEE;
+    font-size: 18px;
+    font-weight: normal;
+    position: relative;
+    left: 20%;
 }

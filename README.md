@@ -1,9 +1,8 @@
 # MISONTIC-Ciclo3
 
-Orlando Mina
+Martin Guacaneme
 
 ### Interfaz para el ingreso a la aplicación
 
-![](preview.PNG)
-![](preview2.PNG)
+![](preview.png)
 

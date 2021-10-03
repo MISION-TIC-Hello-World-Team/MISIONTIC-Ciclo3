@@ -1,4 +1,4 @@
-import { Login, Register } from './pages';
+import { Login, Register, ProductEntry } from './pages';
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,6 +13,9 @@ function App() {
         </Route>
         <Route path="/entrar">
           <Login />
+        </Route>
+        <Route path="/productEntry">
+          <ProductEntry />
         </Route>
         <Route path="/">
           <Login />

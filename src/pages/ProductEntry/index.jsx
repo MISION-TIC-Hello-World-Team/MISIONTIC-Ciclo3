@@ -48,7 +48,7 @@ const ProductEntry = () => {
                                 <input type="submit" value="Guardar producto" />
                             </div>
 
-                            <div className="others-text">
+                            <div className="others">
                                 <div>
                                     <Link to="/">Ir a Interfaz Maestra</Link>
                                 </div>

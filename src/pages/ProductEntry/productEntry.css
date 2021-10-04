@@ -203,7 +203,7 @@ label {
     cursor: pointer;
 }
 
-.others-text {
+.others {
     display: flex;
     justify-content: space-between;
     margin: 10%;
@@ -212,12 +212,12 @@ label {
     text-indent:50px;
 }
 
-.others-text a {
+.others a {
     color: #999;
     text-decoration: none;
 }
 
-.others-text a:hover {
+.others a:hover {
     color: #000;
 }
 

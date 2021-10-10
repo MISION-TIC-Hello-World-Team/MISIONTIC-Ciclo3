@@ -1,0 +1,10 @@
+.table {
+    border: 1px solid black;
+    border-collapse:collapse;
+}
+.cell{
+    text-align:center;
+    height:30px;
+    vertical-align:center;
+    padding:15px;
+}

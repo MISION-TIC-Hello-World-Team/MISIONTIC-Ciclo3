@@ -4,6 +4,12 @@ import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+const  identificadorProducto = (e) => {console.log(e.target.value)};
+const  descripcionProducto = (e) => {console.log(e.target.value)};
+const  valorUnitario = (e) => {console.log(e.target.value)};
+const  estado = (e) => {console.log(e.target.value)};
+
+
 
 const GuardarProducto = () => {
     const toastExito = () => toast.success("Producto guardado exitosamente")
@@ -30,30 +36,30 @@ const ProductEntry = () => {
                 </div>
                 <div className="login-right">
                     <div className="login-form">
-                        <h1>Registro de producto</h1>
+                        <h1>Registro de productos</h1>
                         <form>
                             <div className="group-n">
-                                <input type="text" required />
+                                <input onChange={identificadorProducto} type="text" required />
                                 <span className="highlight"></span>
                                 <span className="bar"></span>
                                 <p>Identificador del producto</p>
                             </div>
                             <div className="group-n">
-                                <input type="text" required />
+                                <input onChange={descripcionProducto} type="text" required />
                                 <span className="highlight"></span>
                                 <span className="bar" ></span>
                                 <p>Descripción del producto</p>
                             </div>
                             <div className="group-n">
-                                <input type="number" required />
+                                <input onChange={valorUnitario} type="number" required />
                                 <span className="highlight"></span>
                                 <span className="bar"></span>
                                 <p>Valor unitario</p>
                             </div>
                             <div className="checkbox" >
-                                <select name="estado" multiple required>
+                                <select onChange={estado} name="estado" multiple required>
                                     <option value="disponible" >Disponible</option>
-                                    <option value="disponible">No Disponible</option>
+                                    <option value="No disponible">No Disponible</option>
                                 </select>
                             </div>
                             <div >
@@ -71,4 +77,4 @@ const ProductEntry = () => {
         </div>
     )
 }
-export default ProductEntry
+export {ProductEntry, identificadorProducto,descripcionProducto,valorUnitario,estado}

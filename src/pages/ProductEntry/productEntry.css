@@ -11,6 +11,14 @@
     margin: 10px 50px 75px 100x;
     text-align:center;
     padding: 10px 10px 10px 10px;
+    border-radius:10px;
+}
+.checkbox-bottom{
+    border-radius:10px;   
+}
+
+.checkbox-bottom:hover{
+    background-color:#404040;
 }
 .login-screen {
     height: 100vh;
@@ -69,9 +77,11 @@
     border: groove;
     border-bottom: 1px solid #757575;
     background: transparent;
+    border-radius:10px;
 }
 .group-n input:focus {
     outline: none;
+    
 }
 /* LABEL ======================================= */
 label {

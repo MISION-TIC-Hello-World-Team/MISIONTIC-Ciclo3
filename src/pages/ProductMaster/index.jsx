@@ -3,9 +3,8 @@ import './productMaster.css';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { identificadorProducto, valorUnitario, descripcionProducto, estado } from '../ProductEntry';
 
-const datos = [
+const ProductosBackEnd = [
     {
         id: "12",
         description: "macbook air rojo",
@@ -37,17 +36,11 @@ const datos = [
         state: "No disponible"
     },
 ]
-
 const ProductMaster = () => {
-    const [datos, setDatos] = useState([]);
-
+    const [productos, setProductos] = useState([]);
     useEffect(() => {
-        // obtener datos
-        setDatos(datos)
-    }, []);
-
-
-
+        setProductos(ProductosBackEnd)
+    }, []) // vacio así solo carga por una vez cuando load la pag
     return (
         <div className="login-screen">
             <div className="login-container">
@@ -59,22 +52,22 @@ const ProductMaster = () => {
                 </div>
                 <div className="login-right">
                     <div className="login-form">
-                        <TablaProductos />
+                        <TablaProductos listaProductos={productos} />
                     </div>
                 </div>
             </div>
         </div>
     )
 }
-
-const TablaProductos = (datos) => {
-    useEffect(()=>{
-        console.log(datos);
-    },[datos]);
+const TablaProductos = ({ listaProductos }) => { //listaProductos es un prop
+   /* useEffect(() => {
+        console.log("este es la lisa", listaProductos)
+    }, [listaProductos])
+    */
     return (
         <table >
             <thead>
-                <h1 className=""> Tabla de productos</h1>
+                <h2 className=""> Tabla de productos</h2>
                 <tr className="table">
                     <th className="table cell" >Identificador</th>
                     <th className="table cell">Descripción</th>
@@ -83,18 +76,16 @@ const TablaProductos = (datos) => {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>01</td>
-                    <td>
-                        macbook air blaco
-                    </td>
-                    <td>
-                        5000
-                    </td>
-                    <td>
-                        No disponible
-                    </td>
-                </tr>
+                {listaProductos.map((productos) => {
+                    return (
+                        <tr>
+                            <td>{productos.id}</td>
+                            <td>{productos.description}</td>
+                            <td>{productos.value}</td>
+                            <td>{productos.state}</td>
+                        </tr>
+                    );
+                })}
             </tbody>
         </table>)
 }

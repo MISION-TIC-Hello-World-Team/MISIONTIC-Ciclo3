@@ -16,7 +16,9 @@ const ProductEntry = () => {
     // example 2= Dentro del la form or tabla: <input onChange={(e)=> {console.log(e.target.value)}} type="text" required /> / Same, console.log can be chnaged to setter
 
     //onClick = cuando click en el boton, se ejecuta lo que este en la variable. Donde ese haga click debe tener type="button"
-
+     /*
+     onClick={()=>{toastExito,sendBackend}}
+     */
     //UseState = permite crear setters de una variable. Can be used along with OnChange and OnClick. Primer argunmento is like getter, sencond setter from Java
     // const [productID,setProductID]=useState("");
 
@@ -52,5 +54,11 @@ const ProductEntry = () => {
         <td>{producto.valor}</td> . // Se pone whatever este como variables en las columnas, en este caso "valor", se repite con tods las columns
     }
     */
-    
+
+    // CONCATENACIÒN DE STRINGS/ CLASE CONDICIONAL (YOU CAN CONCATENATE A CHANGING VARIABLE MAYBE MODIFIED BY A STATE WITH A NORMAL STRING)
+    // FORMA BÀSICA Y NO RECOMENDADA BY PROF  - USING + like usual code PY or Java
+    // FORMA RECOMEDADA -> STRING LITERALS = (USAR COMILLAS AL REVES)
+    /*
+    className={ `abc${colorBoton}`} // Within a CSS class (Tailwind works) + {} (code JS within HTLM goes with braces) + $ + variable within
+    */ 
 }

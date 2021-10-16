@@ -5,23 +5,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import React, { useEffect, useState } from 'react';
 import { ProductMaster } from '..';
 
-const GuardarProducto = () => {
-    const toastExito = () => toast.success("Producto guardado exitosamente")
-    return (
-        <div className="login-submit">
-            <input onClick={toastExito} className="checkbox-bottom" id="checkbox-bottom"type="button" value="Guardar producto" />
-            <ToastContainer
-                position="bottom-center"
-                autoClose={5000}
-            />
-        </div>
-    )
-}
+
 const ProductEntry = () => {
-    const [productID,setProductID]=useState("");
-    const [productDesc,setProductDesc]=useState("");
-    const [unitValue,setUnitValue]=useState("");
-    const [status,setStatus]=useState("");
+
     return (
         <div className="login-screen">
             <div className="login-container">
@@ -33,45 +19,66 @@ const ProductEntry = () => {
                 </div>
                 <div className="login-right">
                     <div className="login-form">
-                        <h1>Registro de productos</h1>
-                        <form>
-                            <div className="group-n">
-                                <input onChange={(e)=> {setProductID(e.target.value)}} type="text" required />
-                                <span className="highlight"></span>
-                                <span className="bar"></span>
-                                <p>Identificador del producto</p>
-                            </div>
-                            <div className="group-n">
-                                <input onChange={(e)=> {setProductDesc(e.target.value)}} type="text" required />
-                                <span className="highlight"></span>
-                                <span className="bar" ></span>
-                                <p>Descripción del producto</p>
-                            </div>
-                            <div className="group-n">
-                                <input onChange={(e)=> {setUnitValue(e.target.value)}} type="number" required />
-                                <span className="highlight"></span>
-                                <span className="bar"></span>
-                                <p>Valor unitario</p>
-                            </div>
-                            <div className="checkbox" >
-                                <select onChange={(e)=> {setStatus(e.target.value)}} name="estado" multiple required>
-                                    <option value="disponible" >Disponible</option>
-                                    <option value="No disponible">No Disponible</option>
-                                </select>
-                            </div>
-                            <div >
-                                <GuardarProducto />
-                            </div>
-                            <div className="others">
-                                <div>
-                                    <Link to="./productMaster">Ir a Interfaz Maestra</Link>
-                                </div>
-                            </div>
-                        </form>
+                        <Form />
                     </div>
                 </div>
             </div>
         </div>
+    )
+}
+const Form = () => {
+    const [productID, setProductID] = useState("");
+    const [productDesc, setProductDesc] = useState("");
+    const [unitValue, setUnitValue] = useState("");
+    const [estado, setStatus] = useState("");
+    const toastExito = () => toast.success("Producto guardado exitosamente")
+    const sendBackend = () => {
+        console.log(productID, productDesc, unitValue, estado)
+    }
+    return (
+
+        <div >
+            <h1>Registro de productos</h1>
+            <form>
+                <div className="group-n">
+                    <input value={productID} onChange={(e) => { setProductID(e.target.value) }} type="text" required />
+                    <span className="highlight"></span>
+                    <span className="bar"></span>
+                    <p>Identificador del producto</p>
+                </div>
+                <div className="group-n">
+                    <input value={productDesc} onChange={(e) => { setProductDesc(e.target.value) }} type="text" required />
+                    <span className="highlight"></span>
+                    <span className="bar" ></span>
+                    <p>Descripción del producto</p>
+                </div>
+                <div className="group-n">
+                    <input value={unitValue} onChange={(e) => { setUnitValue(e.target.value) }} type="number" required />
+                    <span className="highlight"></span>
+                    <span className="bar"></span>
+                    <p>Valor unitario</p>
+                </div>
+                <div href="estado "className="checkbox" >
+                    <select value={estado} onChange={(e) => { setStatus(e.target.value) }} name="estado"  required>
+                        <option >Disponible</option>
+                        <option >No Disponible</option>
+                    </select>
+                </div>
+                <div className="login-submit">
+                    <input onClick={toastExito} onClick={()=>{sendBackend()}}className="checkbox-bottom" id="checkbox-bottom" type="button" value="Guardar producto" />
+                    <ToastContainer
+                        position="bottom-center"
+                        autoClose={5000}
+                    />
+                </div>
+                <div className="others">
+                    <div>
+                        <Link to="./productMaster">Ir a Interfaz Maestra</Link>
+                    </div>
+                </div>
+            </form>
+        </div>
+
     )
 }
 export default ProductEntry

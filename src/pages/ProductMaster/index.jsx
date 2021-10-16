@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, createContext} from 'react';
 import './productMaster.css';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ProductEntry } from '..';
+
+export const ProductContext = createContext([]);
 
 const ProductosBackEnd = [
     {
@@ -36,7 +39,13 @@ const ProductosBackEnd = [
         state: "No disponible"
     },
 ]
-const ProductMaster = () => {
+
+export const aux = () =>{
+    
+    
+}
+
+export const ProductMaster = () => {
     const [productos, setProductos] = useState([]);
     useEffect(() => {
         setProductos(ProductosBackEnd)
@@ -52,7 +61,9 @@ const ProductMaster = () => {
                 </div>
                 <div className="login-right">
                     <div className="login-form">
-                        <TablaProductos listaProductos={productos} />
+                        <ProductContext.Provider>
+                        <TablaProductos listaProductos={productos}value={{productos,setProductos}} />
+                        </ProductContext.Provider>
                     </div>
                 </div>
             </div>
@@ -60,10 +71,7 @@ const ProductMaster = () => {
     )
 }
 const TablaProductos = ({ listaProductos }) => { //listaProductos es un prop
-   /* useEffect(() => {
-        console.log("este es la lisa", listaProductos)
-    }, [listaProductos])
-    */
+    
     return (
         <table >
             <thead>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const ProductEntry = () => {
+const notas = () => {
     // DEBE ESTAR DENTRO DE OTRA FUNCION GLOBAL! useEffect que corre solo la primera vez cuando carga la pag porque el segundo argumento esta vacio. 
     //Si el argumento tuviera algo, then cada vez que cambie ese argumento, corre la funtion dentro. 
     //Un useEffec es una function dentro de otra function siendo la interna la que se ejecuta cuando cambia el segundo argumento. NUNCA DEBE NO TENER SEGUNDO ARGUMENTO PORQUE SI NO, QUEDA EN LOOP Y ROMPE EL WEBSITE
@@ -61,4 +61,32 @@ const ProductEntry = () => {
     /*
     className={ `abc${colorBoton}`} // Within a CSS class (Tailwind works) + {} (code JS within HTLM goes with braces) + $ + variable within
     */ 
+   // onSubmit = similar to the other ones on... however recommeded to use in forms. 
+   /*
+    const dataBackEnd = (e) =>{
+        e.preventDefault(); // this is for the pag to load quicker when submitting. Without this kinda opens another pag to send the info 
+        // poner todo lo que involucre enviar info al backend here
+    }   
+   <form onSubmit={dataBackEnd}>
+   </form>
+   */
+
+   // useRef = Use it along with forms to avoid creating a lot of useStates in case there are many fields to be filled in the form.
+   // This is the recommedned by the prof and makes sense. 
+    /*
+    import {useRef} from "React"; // 1- Import useRef
+    const form = useRef(null); // 2 - Crear const for form , set to null 
+    <form ref={form} onSubmit={submitirInfo}> // 3 - put the ref word in the HTML form & also put OnSubmit
+    const submitirInfo = (e) =>{  // 4 - create const for OnSubmit as stated above line 64
+        e.preventDefault();
+        const fd = new FormData(form.current); 5 - create const "FormData", inbuilt React function for forms (creates a dictionary, key and value*)
+
+        const nuevoProducto = {}; // 6 - create const to itirate thru FormData dictionary 
+        fd.forEach((value, key) => {
+            nuevoProducto[key] = value;
+            console.log(nuevoProducto) // In case you wanna show the dictionary in console
+        })
+    }
+    */
+
 }

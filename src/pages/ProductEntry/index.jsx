@@ -2,7 +2,7 @@ import './productEntry.css';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useRef, createContext } from 'react';
 import { ProductContext } from '../ProductMaster';
 
 const ProductosBackEnd = [
@@ -37,10 +37,9 @@ const ProductosBackEnd = [
         state: "No disponible"
     },
 ]
-
 const ProductEntry = () => {
-    
-    
+
+
     return (
         <div className="login-screen">
             <div className="login-container">
@@ -52,60 +51,69 @@ const ProductEntry = () => {
                 </div>
                 <div className="login-right">
                     <div className="login-form">
-                        <Form />
+                        <Formulario />
                     </div>
                 </div>
             </div>
         </div>
     )
 }
-const Form = () => {
-    const {productos,setProductos} = useContext(ProductContext);
-    const [productID, setProductID] = useState("");
-    const [productDesc, setProductDesc] = useState("");
-    const [unitValue, setUnitValue] = useState("");
-    const [estado, setStatus] = useState("");
+
+const Formulario = () => {
+    const form = useRef(null);
+    const submitForm = (e) => {
+        e.preventDefault();
+        const fd = new FormData(form.current);
+
+        const nuevoProducto = {};
+        fd.forEach((value, key) => {
+            nuevoProducto[key] = value;
+            console.log(nuevoProducto)
+        })
+
+    };
+
     const toastExito = () => toast.success("Producto guardado exitosamente");
     /*useEffect(() => {
         setProductos([ProductosBackEnd])
     }, []) // vacio así solo carga por una vez cuando load la pag
     */
     const sendBackend = () => {
-        
-        console.log(productID,productDesc,unitValue,estado)
+
+        //console.log(productID, productDesc, unitValue, estado)
     }
     return (
 
         <div >
             <h1>Registro de productos</h1>
-            <form>
+            <form ref={form} onSubmit={submitForm}>
                 <div className="group-n">
-                    <input value={productID} onChange={(e) => { setProductID(e.target.value) }} type="text" required />
+                    <input name="productID" type="text" required />
                     <span className="highlight"></span>
                     <span className="bar"></span>
                     <p>Identificador del producto</p>
                 </div>
                 <div className="group-n">
-                    <input value={productDesc} onChange={(e) => { setProductDesc(e.target.value) }} type="text" required />
+                    <input name="productDesc" type="text" required />
                     <span className="highlight"></span>
                     <span className="bar" ></span>
                     <p>Descripción del producto</p>
                 </div>
                 <div className="group-n">
-                    <input value={unitValue} onChange={(e) => { setUnitValue(e.target.value) }} type="number" required />
+                    <input name="unitValue" type="number" required />
                     <span className="highlight"></span>
                     <span className="bar"></span>
                     <p>Valor unitario</p>
                 </div>
                 <div href="estado " className="checkbox" >
-                    <select value={estado} onChange={(e) => { setStatus(e.target.value) }} name="estado" required>
-                        <option value="" disabled>Seleccione disponibilidad</option>
+                    <select name="estado " required>
+                        <option value=""disabled>Seleccione disponibilidad</option>
                         <option >Disponible</option>
                         <option >No Disponible</option>
                     </select>
                 </div>
                 <div onClick={toastExito} className="login-submit">
-                    <input onClick={() => { sendBackend()}} className="checkbox-bottom" id="checkbox-bottom" type="button" value="Guardar producto" />
+                    <input onClick={() => { sendBackend() }} className="checkbox-bottom" id="checkbox-bottom" type="submit" value="Guardar producto" />
                     <ToastContainer
                         position="bottom-center"
                         autoClose={5000}

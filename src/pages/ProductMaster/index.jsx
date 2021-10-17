@@ -1,11 +1,8 @@
-import React, { useEffect, useState, createContext} from 'react';
+import React, { useEffect, useState, createContext, useContext } from 'react';
 import './productMaster.css';
-import { Link } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { ProductEntry } from '..';
 
-export const ProductContext = createContext([]);
+
 
 const ProductosBackEnd = [
     {
@@ -40,15 +37,12 @@ const ProductosBackEnd = [
     },
 ]
 
-export const aux = () =>{
-    
-    
-}
 
 export const ProductMaster = () => {
+
     const [productos, setProductos] = useState([]);
     useEffect(() => {
-        setProductos(ProductosBackEnd)
+        setProductos(ProductosBackEnd);
     }, []) // vacio así solo carga por una vez cuando load la pag
     return (
         <div className="login-screen">
@@ -61,9 +55,9 @@ export const ProductMaster = () => {
                 </div>
                 <div className="login-right">
                     <div className="login-form">
-                        <ProductContext.Provider>
-                        <TablaProductos listaProductos={productos}value={{productos,setProductos}} />
-                        </ProductContext.Provider>
+
+                        <TablaProductos listaProductos={productos} />
+
                     </div>
                 </div>
             </div>
@@ -71,7 +65,7 @@ export const ProductMaster = () => {
     )
 }
 const TablaProductos = ({ listaProductos }) => { //listaProductos es un prop
-    
+
     return (
         <table >
             <thead>

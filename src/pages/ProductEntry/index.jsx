@@ -3,40 +3,9 @@ import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import React, { useEffect, useState, useContext, useRef, createContext } from 'react';
-import { ProductContext } from '../ProductMaster';
 
-const ProductosBackEnd = [
-    {
-        id: "12",
-        description: "macbook air rojo",
-        value: 3000,
-        state: "Disponible"
-    },
-    {
-        id: "45",
-        description: "macbook air azul",
-        value: 2000,
-        state: "Disponible"
-    },
-    {
-        id: "67",
-        description: "macbook air verde",
-        value: 1000,
-        state: "Disponible"
-    },
-    {
-        id: "89",
-        description: "macbook air negro",
-        value: 5000,
-        state: "No disponible"
-    },
-    {
-        id: "01",
-        description: "macbook air blaco",
-        value: 6000,
-        state: "No disponible"
-    },
-]
+
+
 const ProductEntry = () => {
 
 
@@ -60,6 +29,7 @@ const ProductEntry = () => {
 }
 
 const Formulario = () => {
+    
     const form = useRef(null);
     const submitForm = (e) => {
         e.preventDefault();
@@ -68,7 +38,7 @@ const Formulario = () => {
         const nuevoProducto = {};
         fd.forEach((value, key) => {
             nuevoProducto[key] = value;
-            console.log(nuevoProducto)
+            console.log()
         })
 
     };
@@ -113,7 +83,7 @@ const Formulario = () => {
                     </select>
                 </div>
                 <div onClick={toastExito} className="login-submit">
-                    <input onClick={() => { sendBackend() }} className="checkbox-bottom" id="checkbox-bottom" type="submit" value="Guardar producto" />
+                    <input className="checkbox-bottom" id="checkbox-bottom" type="submit" value="Guardar producto" />
                     <ToastContainer
                         position="bottom-center"
                         autoClose={5000}
@@ -130,3 +100,4 @@ const Formulario = () => {
     )
 }
 export default ProductEntry
+

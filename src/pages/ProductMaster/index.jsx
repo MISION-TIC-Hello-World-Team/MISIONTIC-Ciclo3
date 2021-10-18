@@ -1,6 +1,7 @@
-import React, { useEffect, useState, createContext, useContext } from 'react';
-import './productMaster.css';
+import React, { useEffect, useState } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
+import './productMaster.css';
+import { nanoid } from 'nanoid';
 
 
 
@@ -67,28 +68,38 @@ export const ProductMaster = () => {
 const TablaProductos = ({ listaProductos }) => { //listaProductos es un prop
 
     return (
-        <table >
-            <thead>
-                <h2 className=""> Tabla de productos</h2>
-                <tr className="table">
-                    <th className="table cell" >Identificador</th>
-                    <th className="table cell">Descripción</th>
-                    <th className="table cell ">Valor Unitario</th>
-                    <th className="table cell">Estado</th>
-                </tr>
-            </thead>
-            <tbody>
-                {listaProductos.map((productos) => {
-                    return (
-                        <tr>
-                            <td>{productos.id}</td>
-                            <td>{productos.description}</td>
-                            <td>{productos.value}</td>
-                            <td>{productos.state}</td>
+        <div>
+            <h2 className="title"> Tabla de productos</h2>
+            <div>
+                <table className="table">
+                    <thead>
+                        <tr className="table">
+                            <th  >Identificador</th>
+                            <th >Descripción</th>
+                            <th >Valor Unitario</th>
+                            <th >Estado</th>
+                            <th >Editar / Eliminar</th>
                         </tr>
-                    );
-                })}
-            </tbody>
-        </table>)
+                    </thead>
+                    <tbody>
+                        {listaProductos.map((productos) => {
+                            return (
+                                <tr >
+                                    <td>{productos.id}</td>
+                                    <td>{productos.description}</td>
+                                    <td>{productos.value}</td>
+                                    <td>{productos.state}</td>
+                                    <td className="actions">
+                                        <i className="fas fa-edit actions"/>
+                                        <i className="fas fa-trash-alt actions"/>
+                                    </td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    )
 }
 export default ProductMaster

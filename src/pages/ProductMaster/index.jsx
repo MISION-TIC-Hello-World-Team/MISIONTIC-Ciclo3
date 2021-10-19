@@ -39,12 +39,18 @@ const ProductosBackEnd = [
 ]
 
 
-export const ProductMaster = () => {
-
+export const ProductMaster = (listaProductos) => {
     const [productos, setProductos] = useState([]);
+    const [busqueda, setBusqueda] = useState("");
     useEffect(() => {
         setProductos(ProductosBackEnd);
     }, []) // vacio así solo carga por una vez cuando load la pag
+    useEffect(()=>{
+        console.log(busqueda);
+    },[busqueda]);
+
+    
+
     return (
         <div className="login-screen">
             <div className="login-container">
@@ -57,7 +63,7 @@ export const ProductMaster = () => {
                 <div className="login-right">
                     <div className="login-form">
 
-                        <TablaProductos listaProductos={productos} />
+                        <TablaProductos listaProductos={productos} setBusquedax={setBusqueda}/>
 
                     </div>
                 </div>
@@ -65,12 +71,16 @@ export const ProductMaster = () => {
         </div>
     )
 }
-const TablaProductos = ({ listaProductos }) => { //listaProductos es un prop
+const TablaProductos = ({ listaProductos, setBusquedax}) => { //listaProductos es un prop
 
     return (
         <div>
+
             <h2 className="title"> Tabla de productos</h2>
             <div>
+                <div className="busqueda">
+                    <input onChange={(e)=>setBusquedax(e.target.value)} placeholder="Busqueda" className="busqueda-in"></input>
+                </div>
                 <table className="table">
                     <thead>
                         <tr className="table">
@@ -90,8 +100,8 @@ const TablaProductos = ({ listaProductos }) => { //listaProductos es un prop
                                     <td>{productos.value}</td>
                                     <td>{productos.state}</td>
                                     <td className="actions">
-                                        <i className="fas fa-edit actions"/>
-                                        <i className="fas fa-trash-alt actions"/>
+                                        <i className="fas fa-edit actions" />
+                                        <i className="fas fa-trash-alt actions" />
                                     </td>
                                 </tr>
                             );

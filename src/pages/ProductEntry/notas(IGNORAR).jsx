@@ -89,5 +89,18 @@ const notas = () => {
     }
     */
 
-    //CRUD(CREATE, READ, UPDATE, DELETE) - ESTANDAR REST (GET,POST,PUT/PATCH/DELETE)
+    //CRUD(CREATE, READ, UPDATE, DELETE) - ESTANDAR REST (GET,POST,PUT/PATCH/DELETE) // ANOTHER POPULAR STANDARD IS GRAPHQL 
+
+    // Mensajes cuando el cursor pasa sobre algo. TOOLTIP -https://mui.com/components/tooltips/ // Import Material UI (ONLY CORE) to make it work
+
+    // POP UP - DIALOG // Use it only when user needs to accept or deny an action. (pagos, borrar algo, etc..)  - https://mui.com/components/dialogs/
+
+    // LOADING - PROGRESO // https://mui.com/components/progress/ - Mostrar loading 
+
+    // ACORDEON - https://mui.com/components/accordion/ - Desglose 
+
+    // Paginación // TABS https://mui.com/components/tabs/ - Cuando deben haber varias paginas en algo 
+
+    // USAR CALENDARIOS, FECHAS Y DEMÁS  - https://material-ui-pickers.dev/ 
+
 }

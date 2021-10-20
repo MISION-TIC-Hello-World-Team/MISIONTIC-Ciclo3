@@ -3,7 +3,7 @@ import { MongoClient } from "mongodb";
 
 const app = Express();
 app.use(Express.json());
-const stringConexion = "mongodb+srv://oscarnicolas:misiontic@cluster0.js2zb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+
 
 const client = new MongoClient(stringConexion, {
     useNewUrlParser: true,

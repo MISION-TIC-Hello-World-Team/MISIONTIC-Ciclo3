@@ -4,7 +4,7 @@ import { stringConexion } from "./stringConexion.js";
 
 const app = Express();
 app.use(Express.json());
-const stringConexion1 = stringConexion;
+
 const client = new MongoClient(stringConexion, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -48,6 +48,8 @@ const main = () => {
             console.log('escuchando puerto 5000');
         });
     });
+
 };
 
 main();
+

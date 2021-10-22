@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import './productMaster.css';
 import { nanoid } from 'nanoid';
+import { obtenerProductos } from '../utils';
 
 
 
@@ -35,9 +36,10 @@ const ProductosBackEnd = [
         description: "macbook air blaco",
         value: 6000,
         state: "No disponible"
-    },
+    }
 ]
 
+console.log(obtenerProductos);
 
 export const ProductMaster = (listaProductos) => {
     const [productos, setProductos] = useState([]);

@@ -2,9 +2,15 @@ import './productEntry.css';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from "axios";
 import React, { useEffect, useState, useContext, useRef, createContext } from 'react';
 
-
+const options = {
+    method: 'POST',
+    url: 'http://localhost:5000/productMaster/nuevo',
+    headers: { 'Content-Type': 'application/json' },
+    data: { description: 'macbook air rojo', value: 3, state: 'Disponible' }
+};
 
 const ProductEntry = () => {
 
@@ -29,60 +35,61 @@ const ProductEntry = () => {
 }
 
 const Formulario = () => {
-    
+
     const form = useRef(null);
-    const submitForm = (e) => {
+    const submitForm = async (e) => {
         e.preventDefault();
         const fd = new FormData(form.current);
 
         const nuevoProducto = {};
         fd.forEach((value, key) => {
             nuevoProducto[key] = value;
-            console.log()
-        })
 
+        })
+        const options = {
+            method: 'POST',
+            url: 'http://localhost:5000/productMaster/nuevo',
+            headers: { 'Content-Type': 'application/json' },
+            data: { description: nuevoProducto.description, value: nuevoProducto.value, state: nuevoProducto.state }
+        };
+
+        await axios.request(options).then(function (response) {
+            console.log(response.data);
+            toast.success("Producto creado exitosamente");
+            console.log(nuevoProducto);
+        }).catch(function (error) {
+            console.error(error);
+            toast.error("Error creando producto");
+        });
     };
 
-    const toastExito = () => toast.success("Producto guardado exitosamente");
-    /*useEffect(() => {
-        setProductos([ProductosBackEnd])
-    }, []) // vacio así solo carga por una vez cuando load la pag
-    */
-    const sendBackend = () => {
 
-        //console.log(productID, productDesc, unitValue, estado)
-    }
     return (
 
         <div >
             <h1>Registro de productos</h1>
             <form ref={form} onSubmit={submitForm}>
+                
                 <div className="group-n">
-                    <input name="productID" type="text" required />
-                    <span className="highlight"></span>
-                    <span className="bar"></span>
-                    <p>Identificador del producto</p>
-                </div>
-                <div className="group-n">
-                    <input name="productDesc" type="text" required />
+                    <input name="description" type="text" required />
                     <span className="highlight"></span>
                     <span className="bar" ></span>
                     <p>Descripción del producto</p>
                 </div>
                 <div className="group-n">
-                    <input name="unitValue" type="number" required />
+                    <input name="value" type="number" required />
                     <span className="highlight"></span>
                     <span className="bar"></span>
                     <p>Valor unitario</p>
                 </div>
                 <div href="estado " className="checkbox" >
-                    <select name="estado " required>
-                        <option value=""disabled>Seleccione disponibilidad</option>
+                    <select name="state" defaultValue={0} required>
+                        <option  disabled>Seleccione disponibilidad</option>
                         <option >Disponible</option>
                         <option >No Disponible</option>
                     </select>
                 </div>
-                <div onClick={toastExito} className="login-submit">
+                <div className="login-submit">
                     <input className="checkbox-bottom" id="checkbox-bottom" type="submit" value="Guardar producto" />
                     <ToastContainer
                         position="bottom-center"

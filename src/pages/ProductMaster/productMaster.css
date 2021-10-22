@@ -35,3 +35,16 @@ background-color:#ddd;
 .busqueda-in{
     padding:5px;
 }
+.foot{
+    
+    text-align:center;
+    cursor: pointer;
+
+}
+.foot a {
+    color: #999;
+    text-decoration: none;
+}
+.foot a:hover {
+    color: #000;
+}

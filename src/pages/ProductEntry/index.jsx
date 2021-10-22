@@ -69,7 +69,7 @@ const Formulario = () => {
         <div >
             <h1>Registro de productos</h1>
             <form ref={form} onSubmit={submitForm}>
-                
+
                 <div className="group-n">
                     <input name="description" type="text" required />
                     <span className="highlight"></span>
@@ -83,8 +83,8 @@ const Formulario = () => {
                     <p>Valor unitario</p>
                 </div>
                 <div href="estado " className="checkbox" >
-                    <select name="state" defaultValue={0} required>
-                        <option  disabled>Seleccione disponibilidad</option>
+                    <select name="state" required>
+                        <option disabled>Seleccione disponibilidad</option>
                         <option >Disponible</option>
                         <option >No Disponible</option>
                     </select>

@@ -3,55 +3,33 @@ import 'react-toastify/dist/ReactToastify.css';
 import './productMaster.css';
 import { nanoid } from 'nanoid';
 import { obtenerProductos } from '../utils';
+import axios from "axios";
+import { Link } from 'react-router-dom';
 
 
-
-const ProductosBackEnd = [
-    {
-        id: "12",
-        description: "macbook air rojo",
-        value: 3000,
-        state: "Disponible"
-    },
-    {
-        id: "45",
-        description: "macbook air azul",
-        value: 2000,
-        state: "Disponible"
-    },
-    {
-        id: "67",
-        description: "macbook air verde",
-        value: 1000,
-        state: "Disponible"
-    },
-    {
-        id: "89",
-        description: "macbook air negro",
-        value: 5000,
-        state: "No disponible"
-    },
-    {
-        id: "01",
-        description: "macbook air blaco",
-        value: 6000,
-        state: "No disponible"
-    }
-]
-
-console.log(obtenerProductos);
 
 export const ProductMaster = (listaProductos) => {
     const [productos, setProductos] = useState([]);
     const [busqueda, setBusqueda] = useState("");
     useEffect(() => {
-        setProductos(ProductosBackEnd);
-    }, []) // vacio así solo carga por una vez cuando load la pag
-    useEffect(()=>{
-        console.log(busqueda);
-    },[busqueda]);
+        const options = {
+            method: 'GET',
+            url: 'http://localhost:5000/productMaster',
+            headers: { 'Content-Type': 'application/json' }
+        };
 
-    
+        axios.request(options).then(function (response) {
+            setProductos(response.data);
+        }).catch(function (error) {
+            console.error(error);
+        });
+        setProductos([]);
+    }, []) // vacio así solo carga por una vez cuando load la pag
+    useEffect(() => {
+        console.log(busqueda);
+    }, [busqueda]);
+
+
 
     return (
         <div className="login-screen">
@@ -65,7 +43,7 @@ export const ProductMaster = (listaProductos) => {
                 <div className="login-right">
                     <div className="login-form">
 
-                        <TablaProductos listaProductos={productos} setBusquedax={setBusqueda}/>
+                        <TablaProductos listaProductos={productos} setBusquedax={setBusqueda} />
 
                     </div>
                 </div>
@@ -73,7 +51,7 @@ export const ProductMaster = (listaProductos) => {
         </div>
     )
 }
-const TablaProductos = ({ listaProductos, setBusquedax}) => { //listaProductos es un prop
+const TablaProductos = ({ listaProductos, setBusquedax }) => { //listaProductos es un prop
 
     return (
         <div>
@@ -81,7 +59,7 @@ const TablaProductos = ({ listaProductos, setBusquedax}) => { //listaProductos e
             <h2 className="title"> Tabla de productos</h2>
             <div>
                 <div className="busqueda">
-                    <input onChange={(e)=>setBusquedax(e.target.value)} placeholder="Busqueda" className="busqueda-in"></input>
+                    <input onChange={(e) => setBusquedax(e.target.value)} placeholder="Busqueda" className="busqueda-in"></input>
                 </div>
                 <table className="table">
                     <thead>
@@ -97,7 +75,7 @@ const TablaProductos = ({ listaProductos, setBusquedax}) => { //listaProductos e
                         {listaProductos.map((productos) => {
                             return (
                                 <tr >
-                                    <td>{productos.id}</td>
+                                    <td>{productos._id.substr(-4)}</td>
                                     <td>{productos.description}</td>
                                     <td>{productos.value}</td>
                                     <td>{productos.state}</td>
@@ -109,7 +87,13 @@ const TablaProductos = ({ listaProductos, setBusquedax}) => { //listaProductos e
                             );
                         })}
                     </tbody>
+                    
                 </table>
+                <div className="foot">
+                    <div>
+                        <Link to="./productEntry">Ir a Interfaz de Creación</Link>
+                    </div>
+                </div>
             </div>
         </div>
     )

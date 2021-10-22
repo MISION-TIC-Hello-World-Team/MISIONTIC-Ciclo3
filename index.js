@@ -36,9 +36,7 @@ app.post("/productMaster/nuevo", (req, res) => {
 
 app.patch('/productMaster/editar', (req, res) => {
     const edicion = req.body;
-    console.log("edicion",edicion);
     const filtroProducto = {_id:  new ObjectId(edicion.id)};
-    console.log("filtroProducto",filtroProducto);
     delete edicion.id;
     const operacion = {
         $set:edicion,
@@ -54,7 +52,7 @@ app.patch('/productMaster/editar', (req, res) => {
     });
 });
 app.delete('/productMaster/eliminar', (req, res) => {
-    const filtroProducto = { _id:ObjectId(req.body.id) };
+    const filtroProducto = { _id: new ObjectId(req.body.id) };
     baseDeDatos.collection('producto').deleteOne(filtroProducto, (err, result) => {
         if (err) {
             console.error(err);

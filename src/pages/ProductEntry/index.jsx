@@ -1,9 +1,9 @@
-import './productEntry.css';
-import { Link } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
-import React, { useEffect, useState, useContext, useRef, createContext } from 'react';
+import React, { useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './productEntry.css';
 
 const options = {
     method: 'POST',
@@ -98,7 +98,7 @@ const Formulario = () => {
                 </div>
                 <div className="others">
                     <div>
-                        <Link to="./productMaster">Ir a Interfaz Maestra</Link>
+                        <Link to="./productMaster">Ir a interfaz de productos</Link>
                     </div>
                 </div>
             </form>

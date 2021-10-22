@@ -1,33 +1,40 @@
-import React, { useEffect, useState } from 'react';
+import axios from "axios";
+import { nanoid } from 'nanoid';
+import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import './productMaster.css';
-import { nanoid } from 'nanoid';
-import { obtenerProductos } from '../utils';
-import axios from "axios";
-import { Link } from 'react-router-dom';
 
 
 
-export const ProductMaster = (listaProductos) => {
+export const ProductMaster = () => {
+
     const [productos, setProductos] = useState([]);
-    const [busqueda, setBusqueda] = useState("");
-    useEffect(() => {
-        const options = {
-            method: 'GET',
-            url: 'http://localhost:5000/productMaster',
-            headers: { 'Content-Type': 'application/json' }
-        };
+    const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
 
-        axios.request(options).then(function (response) {
-            setProductos(response.data);
-        }).catch(function (error) {
-            console.error(error);
-        });
-        setProductos([]);
-    }, []) // vacio así solo carga por una vez cuando load la pag
-    useEffect(() => {
-        console.log(busqueda);
-    }, [busqueda]);
+    useEffect(()=>{
+        const obtenerProductos = async () => {
+
+            const options = {
+                method: 'GET',
+                url: 'http://localhost:5000/productMaster',
+                headers: { 'Content-Type': 'application/json' }
+            };
+
+            await axios.request(options).then(function (response) {
+                setProductos(response.data);
+            }).catch(function (error) {
+                console.error(error);
+            });
+        };
+        if (ejecutarConsulta){
+            obtenerProductos();
+            setEjecutarConsulta(false);
+
+        }
+    },[ejecutarConsulta]);
+
 
 
 
@@ -43,7 +50,7 @@ export const ProductMaster = (listaProductos) => {
                 <div className="login-right">
                     <div className="login-form">
 
-                        <TablaProductos listaProductos={productos} setBusquedax={setBusqueda} />
+                        <TablaProductos listaProductos={productos} setEjecutarConsulta={setEjecutarConsulta} />
 
                     </div>
                 </div>
@@ -51,15 +58,99 @@ export const ProductMaster = (listaProductos) => {
         </div>
     )
 }
-const TablaProductos = ({ listaProductos, setBusquedax }) => { //listaProductos es un prop
 
+const RowsTable = ({ productos, setEjecutarConsulta}) => {
+    const [edit, setEdit] = useState(false);
+    const [infoNuevoProducto, setInfoNuevoProducto] = useState({
+        description: productos.description,
+        value: productos.value,
+        state: productos.state
+    });
+
+    const actualizarProducto = async () => {
+        const options = {
+            method: 'PATCH',
+            url: 'http://localhost:5000/productMaster/editar',
+            headers: { 'Content-Type': 'application/json' },
+            data: { ...infoNuevoProducto, id: productos._id }
+        };
+
+        await axios.request(options).then(function (response) {
+            console.log(response.data);
+            toast.success("Producto editado exitosamente");
+            setEdit(!edit);
+        }).catch(function (error) {
+            console.error(error);
+            toast.error("Error al editar");
+        });
+    };
+
+    const elimintarProducto  = async () => {
+        const options = {
+            method: 'DELETE',
+            url: 'http://localhost:5000/productMaster/eliminar',
+            headers: { 'Content-Type': 'application/json' },
+            data: { id: productos._id }
+        };
+
+        await axios.request(options).then(function (response) {
+            console.log(response.data);
+            setEjecutarConsulta(true);
+            toast.success("Producto eliminado con exito");
+        }).catch(function (error) {
+            console.error(error);
+            toast.error("Error al eliminar el producto");
+        });
+    };
+    return (
+        < tr  >
+            {edit ? (
+                <>
+                    <td>{productos._id.substr(-4)}</td>
+                    <td>
+                        <input type="text" value={infoNuevoProducto.description} onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, description: e.target.value })} />
+                    </td>
+                    <td>
+                        <input type="text" value={infoNuevoProducto.value} onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, value: e.target.value })} />
+                    </td>
+                    <td>
+                        <input type="text" value={infoNuevoProducto.state} onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, state: e.target.value })} />
+                    </td>
+                </>
+            ) : (
+                <>
+                    <td>{productos._id.substr(-4)}</td>
+                    <td>{productos.description}</td>
+                    <td>{productos.value}</td>
+                    <td>{productos.state}</td>
+                </>
+            )}
+            <td className="actions">
+                {edit ? (
+                    <>
+                        <i onClick={() => actualizarProducto()} className="fas fa-check actions" />
+                    </>
+                ) : (
+                    <>
+                        <i onClick={() => setEdit(!edit)} className="fas fa-edit actions" />
+                        <i onClick={() => elimintarProducto()} className="fas fa-trash-alt actions" />
+                        <ToastContainer position="bottom-center" autoClose={5000} />
+                    </>
+                )}
+            </td>
+
+        </tr >
+    )
+}
+
+const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => { 
     return (
         <div>
 
             <h2 className="title"> Tabla de productos</h2>
             <div>
                 <div className="busqueda">
-                    <input onChange={(e) => setBusquedax(e.target.value)} placeholder="Busqueda" className="busqueda-in"></input>
+                    <input  placeholder="Busqueda" className="busqueda-in"></input>
                 </div>
                 <table className="table">
                     <thead>
@@ -74,24 +165,15 @@ const TablaProductos = ({ listaProductos, setBusquedax }) => { //listaProductos 
                     <tbody>
                         {listaProductos.map((productos) => {
                             return (
-                                <tr >
-                                    <td>{productos._id.substr(-4)}</td>
-                                    <td>{productos.description}</td>
-                                    <td>{productos.value}</td>
-                                    <td>{productos.state}</td>
-                                    <td className="actions">
-                                        <i className="fas fa-edit actions" />
-                                        <i className="fas fa-trash-alt actions" />
-                                    </td>
-                                </tr>
+                                <RowsTable key={nanoid()} productos={productos} setEjecutarConsulta={setEjecutarConsulta} />
                             );
                         })}
                     </tbody>
-                    
+
                 </table>
                 <div className="foot">
                     <div>
-                        <Link to="./productEntry">Ir a Interfaz de Creación</Link>
+                        <Link to="./productEntry">Ir a interfaz de creación</Link>
                     </div>
                 </div>
             </div>

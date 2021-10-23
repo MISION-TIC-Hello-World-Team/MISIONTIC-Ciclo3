@@ -1,27 +1,20 @@
 import axios from "axios";
 import { nanoid } from 'nanoid';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import './productMaster.css';
-
-
-
 export const ProductMaster = () => {
-
     const [productos, setProductos] = useState([]);
     const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
-
     useEffect(()=>{
         const obtenerProductos = async () => {
-
             const options = {
                 method: 'GET',
                 url: 'http://localhost:5000/productMaster',
                 headers: { 'Content-Type': 'application/json' }
             };
-
             await axios.request(options).then(function (response) {
                 setProductos(response.data);
             }).catch(function (error) {
@@ -31,13 +24,8 @@ export const ProductMaster = () => {
         if (ejecutarConsulta){
             obtenerProductos();
             setEjecutarConsulta(false);
-
         }
     },[ejecutarConsulta]);
-
-
-
-
     return (
         <div className="login-screen">
             <div className="login-container">
@@ -49,16 +37,13 @@ export const ProductMaster = () => {
                 </div>
                 <div className="login-right">
                     <div className="login-form">
-
                         <TablaProductos listaProductos={productos} setEjecutarConsulta={setEjecutarConsulta} />
-
                     </div>
                 </div>
             </div>
         </div>
     )
 }
-
 const RowsTable = ({ productos, setEjecutarConsulta}) => {
     const [edit, setEdit] = useState(false);
     const [infoNuevoProducto, setInfoNuevoProducto] = useState({
@@ -66,7 +51,6 @@ const RowsTable = ({ productos, setEjecutarConsulta}) => {
         value: productos.value,
         state: productos.state
     });
-
     const actualizarProducto = async () => {
         const options = {
             method: 'PATCH',
@@ -74,7 +58,6 @@ const RowsTable = ({ productos, setEjecutarConsulta}) => {
             headers: { 'Content-Type': 'application/json' },
             data: { ...infoNuevoProducto, id: productos._id }
         };
-
         await axios.request(options).then(function (response) {
             console.log(response.data);
             toast.success("Producto editado exitosamente");
@@ -84,7 +67,6 @@ const RowsTable = ({ productos, setEjecutarConsulta}) => {
             toast.error("Error al editar");
         });
     };
-
     const elimintarProducto  = async () => {
         const options = {
             method: 'DELETE',
@@ -92,7 +74,6 @@ const RowsTable = ({ productos, setEjecutarConsulta}) => {
             headers: { 'Content-Type': 'application/json' },
             data: { id: productos._id }
         };
-
         await axios.request(options).then(function (response) {
             console.log(response.data);
             setEjecutarConsulta(true);
@@ -138,15 +119,12 @@ const RowsTable = ({ productos, setEjecutarConsulta}) => {
                     </>
                 )}
             </td>
-
         </tr >
     )
 }
-
 const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => { 
     return (
         <div>
-
             <h2 className="title"> Tabla de productos</h2>
             <div>
                 <div className="busqueda">
@@ -169,7 +147,6 @@ const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => {
                             );
                         })}
                     </tbody>
-
                 </table>
                 <div className="foot">
                     <div>

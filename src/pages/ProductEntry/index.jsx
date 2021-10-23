@@ -4,12 +4,7 @@ import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './productEntry.css';
-
-
-
 const ProductEntry = () => {
-
-
     return (
         <div className="login-screen">
             <div className="login-container">
@@ -28,18 +23,14 @@ const ProductEntry = () => {
         </div>
     )
 }
-
 const Formulario = () => {
-
     const form = useRef(null);
     const submitForm = async (e) => {
         e.preventDefault();
         const fd = new FormData(form.current);
-
         const nuevoProducto = {};
         fd.forEach((value, key) => {
             nuevoProducto[key] = value;
-
         })
         const options = {
             method: 'POST',
@@ -47,7 +38,6 @@ const Formulario = () => {
             headers: { 'Content-Type': 'application/json' },
             data: { description: nuevoProducto.description, value: nuevoProducto.value, state: nuevoProducto.state }
         };
-
         await axios.request(options).then(function (response) {
             console.log(response.data);
             toast.success("Producto creado exitosamente");
@@ -57,14 +47,10 @@ const Formulario = () => {
             toast.error("Error creando producto");
         });
     };
-
-
     return (
-
         <div >
             <h1>Registro de productos</h1>
             <form ref={form} onSubmit={submitForm}>
-
                 <div className="group-n">
                     <input name="description" type="text" required />
                     <span className="highlight"></span>
@@ -98,8 +84,6 @@ const Formulario = () => {
                 </div>
             </form>
         </div>
-
     )
 }
 export default ProductEntry
-

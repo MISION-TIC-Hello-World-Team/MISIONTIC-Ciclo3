@@ -4,25 +4,25 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import './spr.css';
-export const SaleMaster = () => {
-    const [sales, setSales] = useState([]);
+import './userMaster.css';
+export const UserMaster = () => {
+    const [usuarios, setUsuarios] = useState([]);
     const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
     useEffect(()=>{
-        const obtenerSales = async () => {
+        const obtenerUsuarios = async () => {
             const options = {
                 method: 'GET',
-                url: 'http://localhost:5050/saleMaster',
+                url: 'http://localhost:5000/productMaster',
                 headers: { 'Content-Type': 'application/json' }
             };
             await axios.request(options).then(function (response) {
-                setSales(response.data);
+                setUsuarios(response.data);
             }).catch(function (error) {
                 console.error(error);
             });
         };
         if (ejecutarConsulta){
-            obtenerSales();
+            obtenerUsuarios();
             setEjecutarConsulta(false);
         }
     },[ejecutarConsulta]);
@@ -37,96 +37,84 @@ export const SaleMaster = () => {
                 </div>
                 <div className="login-right">
                     <div className="login-form">
-                        <TablaProductos listaSales={sales} setEjecutarConsulta={setEjecutarConsulta} />
+                        <TablaDeUsuarios listaUsuarios={usuarios} setEjecutarConsulta={setEjecutarConsulta} />
                     </div>
                 </div>
             </div>
         </div>
     )
 }
-const RowsTable = ({ sales, setEjecutarConsulta}) => {
+const RowsTable = ({ usuarios, setEjecutarConsulta}) => {
     const [edit, setEdit] = useState(false);
-    const [infoNuevaVenta, setInfoNuevaVenta] = useState({
-        description: sales.description,
-        value: sales.value,
-        state: sales.state
+    const [infoNuevoUsuario, setinfoNuevoUsuario] = useState({
+        description: usuarios.description,
+        value: usuarios.value,
+        state: usuarios.state
     });
-    const actualizarVenta = async () => {
+    const actualizarProducto = async () => {
         const options = {
             method: 'PATCH',
-            url: 'http://localhost:5050/saleMaster/editar',
+            url: 'http://localhost:5000/productMaster/editar',
             headers: { 'Content-Type': 'application/json' },
-            data: { ...infoNuevaVenta, id: sales._id }
+            data: { ...infoNuevoUsuario, id: usuarios._id }
         };
         await axios.request(options).then(function (response) {
             console.log(response.data);
-            toast.success("Venta editada exitosamente");
+            toast.success("Usuario editado exitosamente");
             setEdit(!edit);
         }).catch(function (error) {
             console.error(error);
             toast.error("Error al editar");
         });
     };
-    const eliminarVenta  = async () => {
+    const elimintarProducto  = async () => {
         const options = {
             method: 'DELETE',
-            url: 'http://localhost:5050/saleMaster/eliminar',
+            url: 'http://localhost:5000/productMaster/eliminar',
             headers: { 'Content-Type': 'application/json' },
-            data: { id: sales._id }
+            data: { id: usuarios._id }
         };
         await axios.request(options).then(function (response) {
             console.log(response.data);
             setEjecutarConsulta(true);
-            toast.success("Venta eliminada con exito");
+            toast.success("Usuario eliminado con exito");
         }).catch(function (error) {
             console.error(error);
-            toast.error("Error al eliminar la venta");
+            toast.error("Error al eliminar el usuario");
         });
     };
     return (
         < tr  >
             {edit ? (
                 <>
-                    <td>{sales._id.substr(-4)}</td>
+                    <td>{usuarios._id.substr(-4)}</td>
                     <td>
-                        <input type="text" value={infoNuevaVenta.date} onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, date: e.target.value })} />
+                        <input type="text" value={infoNuevoUsuario.description} onChange={(e) => setinfoNuevoUsuario({ ...infoNuevoUsuario, description: e.target.value })} />
                     </td>
                     <td>
-                        <input type="text" value={infoNuevaVenta.value} onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, value: e.target.value })} />
+                        <input type="text" value={infoNuevoUsuario.value} onChange={(e) => setinfoNuevoUsuario({ ...infoNuevoUsuario, value: e.target.value })} />
                     </td>
                     <td>
-                        <input type="text" value={infoNuevaVenta.products} onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, products: e.target.value })} />
-                    </td>
-                    <td>
-                        <input type="text" value={infoNuevaVenta.employee} onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, employee: e.target.value })} />
-                    </td>
-                    <td>
-                        <input type="text" value={infoNuevaVenta.client} onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, client: e.target.value })} />
-                    </td>
-                    <td>
-                        <input type="text" value={infoNuevaVenta.clientID} onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, clientID: e.target.value })} />
+                        <input type="text" value={infoNuevoUsuario.state} onChange={(e) => setinfoNuevoUsuario({ ...infoNuevoUsuario, state: e.target.value })} />
                     </td>
                 </>
             ) : (
                 <>
-                    <td>{sales._id.substr(-4)}</td>
-                    <td>{sales.date}</td>
-                    <td>{sales.value}</td>
-                    <td>{sales.products}</td>
-                    <td>{sales.employee}</td>
-                    <td>{sales.client}</td>
-                    <td>{sales.clientID}</td>
+                    <td>{usuarios._id.substr(-4)}</td>
+                    <td>{usuarios.description}</td>
+                    <td>{usuarios.value}</td>
+                    <td>{usuarios.state}</td>
                 </>
             )}
             <td className="actions">
                 {edit ? (
                     <>
-                        <i onClick={() => actualizarVenta()} className="fas fa-check actions" />
+                        <i onClick={() => actualizarProducto()} className="fas fa-check actions" />
                     </>
                 ) : (
                     <>
                         <i onClick={() => setEdit(!edit)} className="fas fa-edit actions" />
-                        <i onClick={() => eliminarVenta()} className="fas fa-trash-alt actions" />
+                        <i onClick={() => elimintarProducto()} className="fas fa-trash-alt actions" />
                         <ToastContainer position="bottom-center" autoClose={5000} />
                     </>
                 )}
@@ -134,10 +122,10 @@ const RowsTable = ({ sales, setEjecutarConsulta}) => {
         </tr >
     )
 }
-const TablaProductos = ({ listaSales, setEjecutarConsulta }) => { 
+const TablaDeUsuarios = ({ listaUsuarios, setEjecutarConsulta }) => { 
     return (
         <div>
-            <h2 className="title"> Tabla de ventas</h2>
+            <h2 className="title"> Tabla de usuarios</h2>
             <div>
                 <div className="busqueda">
                     <input  placeholder="Busqueda" className="busqueda-in"></input>
@@ -145,31 +133,28 @@ const TablaProductos = ({ listaSales, setEjecutarConsulta }) => {
                 <table className="table">
                     <thead>
                         <tr className="table">
-                            <th  >ID</th>
-                            <th >Fecha</th>
+                            <th  >Identificador</th>
+                            <th >Descripción</th>
                             <th >Valor Unitario</th>
-                            <th >Productos vendidos</th>
-                            <th >Vendedor</th>
-                            <th >Cliente</th>
-                            <th >ID Cliente</th>
+                            <th >Estado</th>
                             <th >Editar / Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {listaSales.map((sales) => {
+                        {listaUsuarios.map((usuarios) => {
                             return (
-                                <RowsTable key={nanoid()} sales={sales} setEjecutarConsulta={setEjecutarConsulta} />
+                                <RowsTable key={nanoid()} usuarios={usuarios} setEjecutarConsulta={setEjecutarConsulta} />
                             );
                         })}
                     </tbody>
                 </table>
                 <div className="foot">
                     <div>
-                        <Link to="./saleEntry">Ir a interfaz de registro de venta</Link>
+                        <Link to="./productEntry">Ir a interfaz de creación</Link>
                     </div>
                 </div>
             </div>
         </div>
     )
 }
-export default SaleMaster;
+export default UserMaster

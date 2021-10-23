@@ -1,7 +1,6 @@
 import React from "react";
-import './login.css';
 import { Link } from 'react-router-dom';
-
+import './login.css';
 const Login = () => (
     <div className="login-screen">
         <div className="login-container">
@@ -21,18 +20,15 @@ const Login = () => (
                             <span className="bar"></span>
                             <label>Correo</label>
                         </div>
-
                         <div className="group">
                             <input type="password" required />
                             <span className="highlight"></span>
                             <span className="bar"></span>
                             <label>Contraseña</label>
                         </div>
-
                         <div className="login-submit">
                             <input type="submit" value="Entrar" />
                         </div>
-
                         <div className="others-text">
                             <div>
                                 <Link className="link-text-left" to="/">Olvide mi contraseña</Link>
@@ -47,5 +43,4 @@ const Login = () => (
         </div>
     </div>
 )
-
 export default Login;

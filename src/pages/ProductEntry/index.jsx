@@ -5,12 +5,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './productEntry.css';
 
-const options = {
-    method: 'POST',
-    url: 'http://localhost:5000/productMaster/nuevo',
-    headers: { 'Content-Type': 'application/json' },
-    data: { description: 'macbook air rojo', value: 3, state: 'Disponible' }
-};
+
 
 const ProductEntry = () => {
 

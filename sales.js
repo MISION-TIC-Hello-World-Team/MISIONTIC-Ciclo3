@@ -2,7 +2,6 @@ import Express from "express";
 import { MongoClient, ObjectId } from "mongodb";
 import { stringConexion } from "./stringConexion.js";
 import cors from "cors";
-import { mainSales } from "./sales.js";
 
 
 const app = Express();
@@ -13,10 +12,10 @@ const client = new MongoClient(stringConexion, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
-app.get("/productMaster", (req, res) => {
-    baseDeDatos.collection("producto").find().limit(50).toArray((err, result) => {
+app.get("/saleMaster", (req, res) => {
+    baseDeDatos.collection("venta").find().limit(50).toArray((err, result) => {
         if (err) {
-            res.status(500).send("error consultando productos")
+            res.status(500).send("error consultando ventas")
         } else {
             res.json(result);
         }
@@ -24,10 +23,10 @@ app.get("/productMaster", (req, res) => {
 });
 
 
-app.post("/productMaster/nuevo", (req, res) => {
-    const datosProductos = req.body;
-    console.log(datosProductos);
-    baseDeDatos.collection("producto").insertOne(datosProductos, (err, result) => {
+app.post("/saleMaster/nuevo", (req, res) => {
+    const datosventas = req.body;
+    console.log(datosventas);
+    baseDeDatos.collection("venta").insertOne(datosventas, (err, result) => {
         if (err) {
             console.error(err);
             res.sendStatus(500);
@@ -38,16 +37,16 @@ app.post("/productMaster/nuevo", (req, res) => {
     });
 });
 
-app.patch('/productMaster/editar', (req, res) => {
+app.patch('/saleMaster/editar', (req, res) => {
     const edicion = req.body;
-    const filtroProducto = {_id:  new ObjectId(edicion.id)};
+    const filtroventa = {_id:  new ObjectId(edicion.id)};
     delete edicion.id;
     const operacion = {
         $set:edicion,
     };
-    baseDeDatos.collection("producto").updateOne(filtroProducto, operacion, { upsert: true, returnOriginal: true },(err,result)=>{
+    baseDeDatos.collection("venta").updateOne(filtroventa, operacion, { upsert: true, returnOriginal: true },(err,result)=>{
         if (err){
-            console.error("error editando producto",err);
+            console.error("error editando venta",err);
             res.sendStatus(500);
         }else{
             console.log("actualizado con exito");
@@ -55,9 +54,9 @@ app.patch('/productMaster/editar', (req, res) => {
         }
     });
 });
-app.delete('/productMaster/eliminar', (req, res) => {
-    const filtroProducto = { _id: new ObjectId(req.body.id) };
-    baseDeDatos.collection('producto').deleteOne(filtroProducto, (err, result) => {
+app.delete('/saleMaster/eliminar', (req, res) => {
+    const filtroventa = { _id: new ObjectId(req.body.id) };
+    baseDeDatos.collection('venta').deleteOne(filtroventa, (err, result) => {
         if (err) {
             console.error(err);
             res.sendStatus(500);
@@ -68,19 +67,19 @@ app.delete('/productMaster/eliminar', (req, res) => {
 });
 
 let baseDeDatos;
-const main = () => {
+
+export const mainSales= () => {
     client.connect((err, db) => {
         if (err) {
             console.error('Error conectando a la base de datos');
             return 'error';
         }
         baseDeDatos = db.db('concesionario');
-        console.log('baseDeDatos exitosa');
-        return app.listen(5000, () => {
-            console.log('escuchando puerto 5000');
+        console.log('baseDeDatos sales exitosa');
+        return app.listen(5050, () => {
+            console.log('escuchando puerto 5050');
         });
     });
 
 };
-main();
-mainSales();
+

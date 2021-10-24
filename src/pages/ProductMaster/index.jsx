@@ -62,6 +62,7 @@ const RowsTable = ({ productos, setEjecutarConsulta}) => {
             console.log(response.data);
             toast.success("Producto editado exitosamente");
             setEdit(!edit);
+            setEjecutarConsulta(true);
         }).catch(function (error) {
             console.error(error);
             toast.error("Error al editar");

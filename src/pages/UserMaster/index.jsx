@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import './userMaster.css';
+
 export const UserMaster = () => {
     const [usuarios, setUsuarios] = useState([]);
     const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
@@ -12,7 +13,7 @@ export const UserMaster = () => {
         const obtenerUsuarios = async () => {
             const options = {
                 method: 'GET',
-                url: 'http://localhost:5000/productMaster',
+                url: 'http://localhost:5001/userMaster',
                 headers: { 'Content-Type': 'application/json' }
             };
             await axios.request(options).then(function (response) {
@@ -47,14 +48,14 @@ export const UserMaster = () => {
 const RowsTable = ({ usuarios, setEjecutarConsulta}) => {
     const [edit, setEdit] = useState(false);
     const [infoNuevoUsuario, setinfoNuevoUsuario] = useState({
-        description: usuarios.description,
-        value: usuarios.value,
+        user: usuarios.user,
+        emaillue: usuarios.email,
         state: usuarios.state
     });
     const actualizarProducto = async () => {
         const options = {
             method: 'PATCH',
-            url: 'http://localhost:5000/productMaster/editar',
+            url: 'http://localhost:5001/userMaster/editar',
             headers: { 'Content-Type': 'application/json' },
             data: { ...infoNuevoUsuario, id: usuarios._id }
         };
@@ -62,6 +63,7 @@ const RowsTable = ({ usuarios, setEjecutarConsulta}) => {
             console.log(response.data);
             toast.success("Usuario editado exitosamente");
             setEdit(!edit);
+            setEjecutarConsulta(true);
         }).catch(function (error) {
             console.error(error);
             toast.error("Error al editar");
@@ -70,7 +72,7 @@ const RowsTable = ({ usuarios, setEjecutarConsulta}) => {
     const elimintarProducto  = async () => {
         const options = {
             method: 'DELETE',
-            url: 'http://localhost:5000/productMaster/eliminar',
+            url: 'http://localhost:5001/userMaster/eliminar',
             headers: { 'Content-Type': 'application/json' },
             data: { id: usuarios._id }
         };
@@ -89,10 +91,10 @@ const RowsTable = ({ usuarios, setEjecutarConsulta}) => {
                 <>
                     <td>{usuarios._id.substr(-4)}</td>
                     <td>
-                        <input type="text" value={infoNuevoUsuario.description} onChange={(e) => setinfoNuevoUsuario({ ...infoNuevoUsuario, description: e.target.value })} />
+                        <input type="text" value={infoNuevoUsuario.user} onChange={(e) => setinfoNuevoUsuario({ ...infoNuevoUsuario, user: e.target.value })} />
                     </td>
                     <td>
-                        <input type="text" value={infoNuevoUsuario.value} onChange={(e) => setinfoNuevoUsuario({ ...infoNuevoUsuario, value: e.target.value })} />
+                        <input type="text" value={infoNuevoUsuario.email} onChange={(e) => setinfoNuevoUsuario({ ...infoNuevoUsuario, email: e.target.value })} />
                     </td>
                     <td>
                         <input type="text" value={infoNuevoUsuario.state} onChange={(e) => setinfoNuevoUsuario({ ...infoNuevoUsuario, state: e.target.value })} />
@@ -101,9 +103,9 @@ const RowsTable = ({ usuarios, setEjecutarConsulta}) => {
             ) : (
                 <>
                     <td>{usuarios._id.substr(-4)}</td>
-                    <td>{usuarios.description}</td>
-                    <td>{usuarios.value}</td>
-                    <td>{usuarios.state}</td>
+                    <td>{usuarios.user}</td>
+                    <td>{usuarios.email}</td>
+                    <td >{usuarios.state}</td>
                 </>
             )}
             <td className="actions">
@@ -134,8 +136,8 @@ const TablaDeUsuarios = ({ listaUsuarios, setEjecutarConsulta }) => {
                     <thead>
                         <tr className="table">
                             <th  >Identificador</th>
-                            <th >Descripción</th>
-                            <th >Valor Unitario</th>
+                            <th >Usuario</th>
+                            <th >Correo</th>
                             <th >Estado</th>
                             <th >Editar / Eliminar</th>
                         </tr>

@@ -1,11 +1,16 @@
 import axios from "axios";
-import { nanoid } from 'nanoid';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './saleEntry.css';
+import { nanoid } from 'nanoid';
+
+
+
 const SaleEntry = () => {
+
+
     return (
         <div className="login-screen">
             <div className="login-container">
@@ -24,14 +29,18 @@ const SaleEntry = () => {
         </div>
     )
 }
+
 const TablaPrincipal = () => {
+
     const form = useRef(null);
     const submitVentas = async (e) => {
         e.preventDefault();
         const fd = new FormData(form.current);
+
         const nuevaVenta = {};
         fd.forEach((value, key) => {
             nuevaVenta[key] = value;
+
         })
         const options = {
             method: 'POST',
@@ -45,6 +54,7 @@ const TablaPrincipal = () => {
                 clientID: nuevaVenta.clientID
               }
         };
+
         await axios.request(options).then(function (response) {
             console.log(response.data);
             toast.success("Producto creado exitosamente");
@@ -54,15 +64,19 @@ const TablaPrincipal = () => {
             toast.error("Error creando producto");
         });
     };
+
     const [productos, setProductos] = useState([]);
     const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
+
     useEffect(() => {
         const obtenerProductos = async () => {
+
             const options = {
                 method: 'GET',
                 url: 'http://localhost:5000/productMaster',
                 headers: { 'Content-Type': 'application/json' }
             };
+
             await axios.request(options).then(function (response) {
                 setProductos(response.data);
             }).catch(function (error) {
@@ -72,16 +86,20 @@ const TablaPrincipal = () => {
         if (ejecutarConsulta) {
             obtenerProductos();
             setEjecutarConsulta(false);
+
         }
     }, []);
+
     const [empleados, setEmpleados] = useState([]);
     useEffect(() => {
         const obtenerEmpleados = async () => {
+
             const options = {
                 method: 'GET',
                 //url: 'http://localhost:5000/employeeMaster',
                 headers: { 'Content-Type': 'application/json' }
             };
+
             await axios.request(options).then(function (response) {
                 setEmpleados(response.data);
             }).catch(function (error) {
@@ -91,12 +109,16 @@ const TablaPrincipal = () => {
         if (ejecutarConsulta) {
             obtenerEmpleados();
             setEjecutarConsulta(false);
+
         }
     }, []);
     return (
+
         <div >
             <h1>Registro de productos</h1>
             <form ref={form} onSubmit={submitVentas}>
+
+
                 <div className="group-n">
                     <input name="description" type="date" required />
                     <span className="highlight"></span>
@@ -111,12 +133,14 @@ const TablaPrincipal = () => {
                 </div>
                 Seleccione productos vendidos
                 * Use la tecla control para varios
+
                 <div className="checkbox" >
                     <select name="productos" multiple id="dropdown" >
                         {productos.map((v) => {
                             return <option onClick={() => console.log(v.value)} key={nanoid()}>{v.description}{" - "}{v.value}{" - "}{v.state}</option>
                         })}
                     </select>
+
                 </div>
                 Seleccione vendedor
                 <div className="checkbox" >
@@ -125,6 +149,7 @@ const TablaPrincipal = () => {
                             return <option onClick={() => console.log(v.value)} key={nanoid()}>{v.description}{" - "}{v.value}{" - "}{v.state}</option>
                         })}
                     </select>
+
                 </div>
                 <div className="group">
                     <input type="text" required />
@@ -152,6 +177,8 @@ const TablaPrincipal = () => {
                 </div>
             </form>
         </div>
+
     )
 }
 export default SaleEntry;
+

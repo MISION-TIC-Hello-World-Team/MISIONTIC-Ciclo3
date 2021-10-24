@@ -76,8 +76,8 @@ export const mainUsers= () => {
         }
         baseDeDatos = db.db('concesionario');
         console.log('baseDeDatos sales exitosa');
-        return app.listen(6000, () => {
-            console.log('escuchando puerto 6000');
+        return app.listen(5001, () => {
+            console.log('escuchando users puerto 5001');
         });
     });
 

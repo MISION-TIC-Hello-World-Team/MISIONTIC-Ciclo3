@@ -5,6 +5,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './saleEntry.css';
 import { nanoid } from 'nanoid';
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 
@@ -12,14 +13,11 @@ const SaleEntry = () => {
 
 
     return (
+
         <div className="login-screen">
             <div className="login-container">
-                <div className="login-left">
-                    <div className="login-title">
-                        <h1>MISIONTIC</h1>
-                        <h2>Hello World Team</h2>
-                    </div>
-                </div>
+
+
                 <div className="login-right">
                     <div className="login-form">
                         <TablaPrincipal />
@@ -52,7 +50,7 @@ const TablaPrincipal = () => {
                 product: nuevaVenta.product,
                 vendedor: nuevaVenta.vendedor,
                 clientID: nuevaVenta.clientID
-              }
+            }
         };
 
         await axios.request(options).then(function (response) {
@@ -112,10 +110,11 @@ const TablaPrincipal = () => {
 
         }
     }, []);
+    const { logout } = useAuth0();
     return (
 
         <div >
-            <h1>Registro de productos</h1>
+            <h2 className="title" >Registro de ventas</h2>
             <form ref={form} onSubmit={submitVentas}>
 
 
@@ -170,10 +169,18 @@ const TablaPrincipal = () => {
                         autoClose={5000}
                     />
                 </div>
-                <div className="others">
-                    <div>
-                        <Link to="./saleMaster">Ir a la interfaz de ventas</Link>
+                <h3>Interfaces</h3>
+                <div >
+
+                    <div className="foot">
+                        <Link to="./saleEntry">Registro de ventas</Link>{" ------- "}
+                        <Link to="./saleMaster">Maestro de ventas</Link>{" ------- "}
+                        <Link to="./productEntry">Registro de productos</Link>{" ------- "}
+                        <Link to="./productMaster">Maestro de productos</Link>{" ------- "}
+                        <Link to="./userMaster">Maestro de usuarios</Link>{" ------- "}
+                        <button onClick={() => logout({  returnTo: "http://localhost:3000/landingPage"})}>Cerrar sesión</button>
                     </div>
+                    
                 </div>
             </form>
         </div>
@@ -181,4 +188,3 @@ const TablaPrincipal = () => {
     )
 }
 export default SaleEntry;
-

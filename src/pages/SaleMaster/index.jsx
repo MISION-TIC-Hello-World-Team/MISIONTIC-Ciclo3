@@ -5,10 +5,12 @@ import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import './spr.css';
+import { useAuth0 } from "@auth0/auth0-react";
+
 export const SaleMaster = () => {
     const [sales, setSales] = useState([]);
     const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
-    useEffect(()=>{
+    useEffect(() => {
         const obtenerSales = async () => {
             const options = {
                 method: 'GET',
@@ -21,20 +23,15 @@ export const SaleMaster = () => {
                 console.error(error);
             });
         };
-        if (ejecutarConsulta){
+        if (ejecutarConsulta) {
             obtenerSales();
             setEjecutarConsulta(false);
         }
-    },[ejecutarConsulta]);
+    }, [ejecutarConsulta]);
     return (
         <div className="login-screen">
             <div className="login-container">
-                <div className="login-left">
-                    <div className="login-title">
-                        <h1>MISIONTIC</h1>
-                        <h2>Hello World Team</h2>
-                    </div>
-                </div>
+                
                 <div className="login-right">
                     <div className="login-form">
                         <TablaProductos listaSales={sales} setEjecutarConsulta={setEjecutarConsulta} />
@@ -44,7 +41,7 @@ export const SaleMaster = () => {
         </div>
     )
 }
-const RowsTable = ({ sales, setEjecutarConsulta}) => {
+const RowsTable = ({ sales, setEjecutarConsulta }) => {
     const [edit, setEdit] = useState(false);
     const [infoNuevaVenta, setInfoNuevaVenta] = useState({
         description: sales.description,
@@ -68,7 +65,7 @@ const RowsTable = ({ sales, setEjecutarConsulta}) => {
             toast.error("Error al editar");
         });
     };
-    const eliminarVenta  = async () => {
+    const eliminarVenta = async () => {
         const options = {
             method: 'DELETE',
             url: 'http://localhost:5050/saleMaster/eliminar',
@@ -135,13 +132,15 @@ const RowsTable = ({ sales, setEjecutarConsulta}) => {
         </tr >
     )
 }
-const TablaProductos = ({ listaSales, setEjecutarConsulta }) => { 
+const TablaProductos = ({ listaSales, setEjecutarConsulta }) => {
+    const { logout } = useAuth0();
+
     return (
         <div>
-            <h2 className="title"> Tabla de ventas</h2>
+            <h2 className="title"> Maestro de ventas</h2>
             <div>
                 <div className="busqueda">
-                    <input  placeholder="Busqueda" className="busqueda-in"></input>
+                    <input placeholder="Busqueda" className="busqueda-in"></input>
                 </div>
                 <table className="table">
                     <thead>
@@ -159,14 +158,25 @@ const TablaProductos = ({ listaSales, setEjecutarConsulta }) => {
                     <tbody>
                         {listaSales.map((sales) => {
                             return (
-                                <RowsTable key={nanoid()} sales={sales} setEjecutarConsulta={setEjecutarConsulta} />
+                                <>
+                                    <RowsTable key={nanoid()} sales={sales} setEjecutarConsulta={setEjecutarConsulta} />
+                                    <ToastContainer
+                                        position="bottom-center"
+                                        autoClose={5000}
+                                    />
+                                </>
                             );
                         })}
                     </tbody>
                 </table>
                 <div className="foot">
-                    <div>
-                        <Link to="./saleEntry">Ir a interfaz de registro de venta</Link>
+                <div>
+                        <Link to="./saleEntry">Registro de ventas</Link>{" ------- "}
+                        <Link to="./saleMaster">Maestro de ventas</Link>{" ------- "}
+                        <Link to="./productEntry">Registro de productos</Link>{" ------- "}
+                        <Link to="./productMaster">Maestro de productos</Link>{" ------- "}
+                        <Link to="./userMaster">Maestro de usuarios</Link>{" ------- "}
+                        <button onClick={() => logout({  returnTo: "http://localhost:3000/landingPage"})}>Cerrar sesión</button>
                     </div>
                 </div>
             </div>

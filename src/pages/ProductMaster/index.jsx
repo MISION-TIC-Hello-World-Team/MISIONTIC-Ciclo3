@@ -5,10 +5,12 @@ import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import './productMaster.css';
+import { useAuth0 } from "@auth0/auth0-react";
+
 export const ProductMaster = () => {
     const [productos, setProductos] = useState([]);
     const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
-    useEffect(()=>{
+    useEffect(() => {
         const obtenerProductos = async () => {
             const options = {
                 method: 'GET',
@@ -21,20 +23,15 @@ export const ProductMaster = () => {
                 console.error(error);
             });
         };
-        if (ejecutarConsulta){
+        if (ejecutarConsulta) {
             obtenerProductos();
             setEjecutarConsulta(false);
         }
-    },[ejecutarConsulta]);
+    }, [ejecutarConsulta]);
     return (
         <div className="login-screen">
             <div className="login-container">
-                <div className="login-left">
-                    <div className="login-title">
-                        <h1>MISIONTIC</h1>
-                        <h2>Hello World Team</h2>
-                    </div>
-                </div>
+
                 <div className="login-right">
                     <div className="login-form">
                         <TablaProductos listaProductos={productos} setEjecutarConsulta={setEjecutarConsulta} />
@@ -44,7 +41,7 @@ export const ProductMaster = () => {
         </div>
     )
 }
-const RowsTable = ({ productos, setEjecutarConsulta}) => {
+const RowsTable = ({ productos, setEjecutarConsulta }) => {
     const [edit, setEdit] = useState(false);
     const [infoNuevoProducto, setInfoNuevoProducto] = useState({
         description: productos.description,
@@ -68,7 +65,7 @@ const RowsTable = ({ productos, setEjecutarConsulta}) => {
             toast.error("Error al editar");
         });
     };
-    const elimintarProducto  = async () => {
+    const elimintarProducto = async () => {
         const options = {
             method: 'DELETE',
             url: 'http://localhost:5000/productMaster/eliminar',
@@ -123,13 +120,14 @@ const RowsTable = ({ productos, setEjecutarConsulta}) => {
         </tr >
     )
 }
-const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => { 
+const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => {
+    const { logout } = useAuth0();
     return (
         <div>
-            <h2 className="title"> Tabla de productos</h2>
+            <h2 className="title"> Maestro de productos</h2>
             <div>
                 <div className="busqueda">
-                    <input  placeholder="Busqueda" className="busqueda-in"></input>
+                    <input placeholder="Busqueda" className="busqueda-in"></input>
                 </div>
                 <table className="table">
                     <thead>
@@ -149,9 +147,14 @@ const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => {
                         })}
                     </tbody>
                 </table>
-                <div className="foot">
-                    <div>
-                        <Link to="./productEntry">Ir a interfaz de creación</Link>
+                <div >
+                    <div className="foot">
+                        <Link to="./saleEntry">Registro de ventas</Link>{" ------- "}
+                        <Link to="./saleMaster">Maestro de ventas</Link>{" ------- "}
+                        <Link to="./productEntry">Registro de productos</Link>{" ------- "}
+                        <Link to="./productMaster">Maestro de productos</Link>{" ------- "}
+                        <Link to="./userMaster">Maestro de usuarios</Link>{" ------- "}
+                        <button onClick={() => logout({ returnTo: "http://localhost:3000/landingPage" })}>Cerrar sesión</button>
                     </div>
                 </div>
             </div>

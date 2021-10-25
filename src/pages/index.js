@@ -5,4 +5,5 @@ import ProductMaster from './ProductMaster';
 import SaleMaster from './SaleMaster';
 import SaleEntry from './SaleEntry';
 import UserMaster from './UserMaster';
-export {Login, Register, ProductEntry, ProductMaster, SaleMaster,SaleEntry, UserMaster};
+import LandingPage from './LandingPage';
+export {Login, Register, ProductEntry, ProductMaster, SaleMaster,SaleEntry, UserMaster, LandingPage};

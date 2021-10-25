@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import './userMaster.css';
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const UserMaster = () => {
     const [usuarios, setUsuarios] = useState([]);
@@ -30,12 +31,7 @@ export const UserMaster = () => {
     return (
         <div className="login-screen">
             <div className="login-container">
-                <div className="login-left">
-                    <div className="login-title">
-                        <h1>MISIONTIC</h1>
-                        <h2>Hello World Team</h2>
-                    </div>
-                </div>
+                
                 <div className="login-right">
                     <div className="login-form">
                         <TablaDeUsuarios listaUsuarios={usuarios} setEjecutarConsulta={setEjecutarConsulta} />
@@ -125,6 +121,7 @@ const RowsTable = ({ usuarios, setEjecutarConsulta}) => {
     )
 }
 const TablaDeUsuarios = ({ listaUsuarios, setEjecutarConsulta }) => { 
+    const { logout } = useAuth0();
     return (
         <div>
             <h2 className="title"> Tabla de usuarios</h2>
@@ -150,9 +147,14 @@ const TablaDeUsuarios = ({ listaUsuarios, setEjecutarConsulta }) => {
                         })}
                     </tbody>
                 </table>
+                <div >
                 <div className="foot">
-                    <div>
-                        <Link to="./productEntry">Ir a interfaz de creación</Link>
+                        <Link to="./saleEntry">Registro de ventas</Link>{" ------- "}
+                        <Link to="./saleMaster">Maestro de ventas</Link>{" ------- "}
+                        <Link to="./productEntry">Registro de productos</Link>{" ------- "}
+                        <Link to="./productMaster">Maestro de productos</Link>{" ------- "}
+                        <Link to="./userMaster">Maestro de usuarios</Link>{" ------- "}
+                        <button onClick={() => logout({  returnTo: "http://localhost:3000/landingPage"})}>Cerrar sesión</button>
                     </div>
                 </div>
             </div>

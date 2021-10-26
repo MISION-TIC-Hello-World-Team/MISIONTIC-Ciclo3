@@ -42,7 +42,7 @@ const TablaPrincipal = () => {
         })
         const options = {
             method: 'POST',
-            url: 'http://localhost:5000/saleMaster/nuevo',
+            url: 'https://quiet-ridge-43761.herokuapp.com/saleMaster/nuevo',
             headers: { 'Content-Type': 'application/json' },
             data: {
                 date: nuevaVenta.date,
@@ -71,7 +71,7 @@ const TablaPrincipal = () => {
 
             const options = {
                 method: 'GET',
-                url: 'http://localhost:5000/productMaster',
+                url: 'https://quiet-ridge-43761.herokuapp.com/productMaster',
                 headers: { 'Content-Type': 'application/json' }
             };
 
@@ -94,7 +94,7 @@ const TablaPrincipal = () => {
 
             const options = {
                 method: 'GET',
-                //url: 'http://localhost:5000/employeeMaster',
+                url: 'https://quiet-ridge-43761.herokuapp.com/employeeMaster',
                 headers: { 'Content-Type': 'application/json' }
             };
 
@@ -178,7 +178,7 @@ const TablaPrincipal = () => {
                         <Link to="./productEntry">Registro de productos</Link>{" ------- "}
                         <Link to="./productMaster">Maestro de productos</Link>{" ------- "}
                         <Link to="./userMaster">Maestro de usuarios</Link>{" ------- "}
-                        <button onClick={() => logout({  returnTo: "http://localhost:3000/landingPage"})}>Cerrar sesión</button>
+                        <button onClick={() => logout({  returnTo: "https://powerful-citadel-56456.herokuapp.com/landingPage"})}>Cerrar sesión</button>
                     </div>
                     
                 </div>

@@ -10,7 +10,7 @@ function App() {
     <Auth0Provider
       domain="mision-tic1.us.auth0.com"
       clientId="SW0WhExn7jFSa1jyGqVZiRStQRZG4unz"
-      redirectUri="http://localhost:3000/saleEntry"
+      redirectUri="https://powerful-citadel-56456.herokuapp.com/saleEntry"
     >
       <Router>
         <Switch>

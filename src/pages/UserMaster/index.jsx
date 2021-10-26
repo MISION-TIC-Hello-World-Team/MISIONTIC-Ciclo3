@@ -14,7 +14,7 @@ export const UserMaster = () => {
         const obtenerUsuarios = async () => {
             const options = {
                 method: 'GET',
-                url: 'http://localhost:5000/userMaster',
+                url: 'https://quiet-ridge-43761.herokuapp.com/userMaster',
                 headers: { 'Content-Type': 'application/json' }
             };
             await axios.request(options).then(function (response) {
@@ -51,7 +51,7 @@ const RowsTable = ({ usuarios, setEjecutarConsulta}) => {
     const actualizarProducto = async () => {
         const options = {
             method: 'PATCH',
-            url: 'http://localhost:5000/userMaster/editar',
+            url: 'https://quiet-ridge-43761.herokuapp.com/userMaster/editar',
             headers: { 'Content-Type': 'application/json' },
             data: { ...infoNuevoUsuario, id: usuarios._id }
         };
@@ -68,7 +68,7 @@ const RowsTable = ({ usuarios, setEjecutarConsulta}) => {
     const elimintarProducto  = async () => {
         const options = {
             method: 'DELETE',
-            url: 'http://localhost:5000/userMaster/eliminar',
+            url: 'https://quiet-ridge-43761.herokuapp.com/userMaster/eliminar',
             headers: { 'Content-Type': 'application/json' },
             data: { id: usuarios._id }
         };
@@ -154,7 +154,7 @@ const TablaDeUsuarios = ({ listaUsuarios, setEjecutarConsulta }) => {
                         <Link to="./productEntry">Registro de productos</Link>{" ------- "}
                         <Link to="./productMaster">Maestro de productos</Link>{" ------- "}
                         <Link to="./userMaster">Maestro de usuarios</Link>{" ------- "}
-                        <button onClick={() => logout({  returnTo: "http://localhost:3000/landingPage"})}>Cerrar sesión</button>
+                        <button onClick={() => logout({  returnTo: "https://powerful-citadel-56456.herokuapp.com/landingPage"})}>Cerrar sesión</button>
                     </div>
                 </div>
             </div>

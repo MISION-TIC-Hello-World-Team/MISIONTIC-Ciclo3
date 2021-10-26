@@ -14,7 +14,7 @@ export const SaleMaster = () => {
         const obtenerSales = async () => {
             const options = {
                 method: 'GET',
-                url: 'http://localhost:5000/saleMaster',
+                url: 'https://quiet-ridge-43761.herokuapp.com/saleMaster',
                 headers: { 'Content-Type': 'application/json' }
             };
             await axios.request(options).then(function (response) {
@@ -51,7 +51,7 @@ const RowsTable = ({ sales, setEjecutarConsulta }) => {
     const actualizarVenta = async () => {
         const options = {
             method: 'PATCH',
-            url: 'http://localhost:5000/saleMaster/editar',
+            url: 'https://quiet-ridge-43761.herokuapp.com/saleMaster/editar',
             headers: { 'Content-Type': 'application/json' },
             data: { ...infoNuevaVenta, id: sales._id }
         };
@@ -68,7 +68,7 @@ const RowsTable = ({ sales, setEjecutarConsulta }) => {
     const eliminarVenta = async () => {
         const options = {
             method: 'DELETE',
-            url: 'http://localhost:5000/saleMaster/eliminar',
+            url: 'https://quiet-ridge-43761.herokuapp.com/saleMaster/eliminar',
             headers: { 'Content-Type': 'application/json' },
             data: { id: sales._id }
         };
@@ -176,7 +176,7 @@ const TablaProductos = ({ listaSales, setEjecutarConsulta }) => {
                         <Link to="./productEntry">Registro de productos</Link>{" ------- "}
                         <Link to="./productMaster">Maestro de productos</Link>{" ------- "}
                         <Link to="./userMaster">Maestro de usuarios</Link>{" ------- "}
-                        <button onClick={() => logout({  returnTo: "http://localhost:3000/landingPage"})}>Cerrar sesión</button>
+                        <button onClick={() => logout({  returnTo: "https://powerful-citadel-56456.herokuapp.com/landingPage"})}>Cerrar sesión</button>
                     </div>
                 </div>
             </div>

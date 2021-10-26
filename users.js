@@ -2,6 +2,8 @@ import Express from "express";
 import { MongoClient, ObjectId } from "mongodb";
 import { stringConexion } from "./stringConexion.js";
 import cors from "cors";
+import { baseDeDatos } from "./index.js";
+import main from "./index.js";
 
 
 const app = Express();
@@ -66,6 +68,8 @@ app.delete('/userMaster/eliminar', (req, res) => {
     });
 });
 
+//main();
+/*
 let baseDeDatos;
 
 export const mainUsers= () => {
@@ -82,4 +86,4 @@ export const mainUsers= () => {
     });
 
 };
-
+*/

@@ -2,7 +2,9 @@ import Express from "express";
 import { MongoClient, ObjectId } from "mongodb";
 import { stringConexion } from "./stringConexion.js";
 import cors from "cors";
-
+import { appListen } from "./index.js";
+import { baseDeDatos } from "./index.js";
+import main from "./index.js";
 
 const app = Express();
 app.use(Express.json());
@@ -66,8 +68,9 @@ app.delete('/saleMaster/eliminar', (req, res) => {
     });
 });
 
-let baseDeDatos;
+//main();
 
+/*
 export const mainSales= () => {
     client.connect((err, db) => {
         if (err) {
@@ -76,10 +79,9 @@ export const mainSales= () => {
         }
         baseDeDatos = db.db('concesionario');
         console.log('baseDeDatos sales exitosa');
-        return app.listen(5050, () => {
-            console.log('escuchando puerto 5050');
-        });
+        appListen();
     });
 
 };
+*/
 

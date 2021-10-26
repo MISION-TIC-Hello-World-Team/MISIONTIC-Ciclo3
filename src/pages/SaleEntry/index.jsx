@@ -42,7 +42,7 @@ const TablaPrincipal = () => {
         })
         const options = {
             method: 'POST',
-            url: 'http://localhost:5050/saleMaster/nuevo',
+            url: 'http://localhost:5000/saleMaster/nuevo',
             headers: { 'Content-Type': 'application/json' },
             data: {
                 date: nuevaVenta.date,
@@ -55,11 +55,11 @@ const TablaPrincipal = () => {
 
         await axios.request(options).then(function (response) {
             console.log(response.data);
-            toast.success("Producto creado exitosamente");
+            toast.success("Venta creado exitosamente");
             console.log(nuevaVenta);
         }).catch(function (error) {
             console.error(error);
-            toast.error("Error creando producto");
+            toast.error("Error creando venta");
         });
     };
 
@@ -163,7 +163,7 @@ const TablaPrincipal = () => {
                     Documento de identificación del cliente
                 </div>
                 <div className="login-submit">
-                    <input className="checkbox-bottom" id="checkbox-bottom" type="submit" value="Guardar producto" />
+                    <input className="checkbox-bottom" id="checkbox-bottom" type="submit" value="Guardar venta" />
                     <ToastContainer
                         position="bottom-center"
                         autoClose={5000}

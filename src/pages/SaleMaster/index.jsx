@@ -14,7 +14,7 @@ export const SaleMaster = () => {
         const obtenerSales = async () => {
             const options = {
                 method: 'GET',
-                url: 'http://localhost:5050/saleMaster',
+                url: 'http://localhost:5000/saleMaster',
                 headers: { 'Content-Type': 'application/json' }
             };
             await axios.request(options).then(function (response) {
@@ -51,7 +51,7 @@ const RowsTable = ({ sales, setEjecutarConsulta }) => {
     const actualizarVenta = async () => {
         const options = {
             method: 'PATCH',
-            url: 'http://localhost:5050/saleMaster/editar',
+            url: 'http://localhost:5000/saleMaster/editar',
             headers: { 'Content-Type': 'application/json' },
             data: { ...infoNuevaVenta, id: sales._id }
         };
@@ -68,7 +68,7 @@ const RowsTable = ({ sales, setEjecutarConsulta }) => {
     const eliminarVenta = async () => {
         const options = {
             method: 'DELETE',
-            url: 'http://localhost:5050/saleMaster/eliminar',
+            url: 'http://localhost:5000/saleMaster/eliminar',
             headers: { 'Content-Type': 'application/json' },
             data: { id: sales._id }
         };

@@ -14,7 +14,7 @@ export const UserMaster = () => {
         const obtenerUsuarios = async () => {
             const options = {
                 method: 'GET',
-                url: 'http://localhost:5001/userMaster',
+                url: 'http://localhost:5000/userMaster',
                 headers: { 'Content-Type': 'application/json' }
             };
             await axios.request(options).then(function (response) {
@@ -51,7 +51,7 @@ const RowsTable = ({ usuarios, setEjecutarConsulta}) => {
     const actualizarProducto = async () => {
         const options = {
             method: 'PATCH',
-            url: 'http://localhost:5001/userMaster/editar',
+            url: 'http://localhost:5000/userMaster/editar',
             headers: { 'Content-Type': 'application/json' },
             data: { ...infoNuevoUsuario, id: usuarios._id }
         };
@@ -68,7 +68,7 @@ const RowsTable = ({ usuarios, setEjecutarConsulta}) => {
     const elimintarProducto  = async () => {
         const options = {
             method: 'DELETE',
-            url: 'http://localhost:5001/userMaster/eliminar',
+            url: 'http://localhost:5000/userMaster/eliminar',
             headers: { 'Content-Type': 'application/json' },
             data: { id: usuarios._id }
         };
